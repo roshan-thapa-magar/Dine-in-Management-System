@@ -46,7 +46,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       <AppSidebar />
       <main className="w-full">
         {/* ✅ Header */}
-        <div className="flex justify-between items-center px-4 py-2 border-b">
+        <div className="flex justify-between items-center px-2 py-2 border-b">
           <SidebarInset>
             <header className="flex shrink-0 items-center gap-2">
               <div className="flex items-center gap-2">
@@ -77,7 +77,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
         </div>
 
         {/* ✅ Content */}
-        <div className="px-4 py-2">{children}</div>
+        <div>{children}</div>
       </main>
     </SidebarProvider>
   );
