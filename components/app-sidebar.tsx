@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Calendar,
   Home,
@@ -21,7 +23,6 @@ import {
   BarChart3,
   ReceiptIcon as CashRegister,
 } from "lucide-react";
-
 import {
   Sidebar,
   SidebarContent,
@@ -35,8 +36,8 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar, // Import useSidebar hook
 } from "@/components/ui/sidebar";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,106 +45,40 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
 // Main menu items
 const mainItems = [
-  {
-    title: "Dashboard",
-    url: "/admin",
-    icon: Home,
-  },
-  {
-    title: "Tables",
-    url: "/admin/tables",
-    icon: Calendar,
-  },
-  {
-    title: "Cashier",
-    url: "/admin/cashier",
-    icon: CashRegister,
-  },
-  {
-    title: "Kitchen",
-    url: "/admin/kitchen",
-    icon: ChefHat,
-  },
-  {
-    title: "Manual Order",
-    url: "/admin/manual-order",
-    icon: FileText,
-  },
-  {
-    title: "Request Waiter",
-    url: "/admin/request-waiter",
-    icon: HandHelping,
-  },
-  {
-    title: "Staff Details",
-    url: "/admin/staff-details",
-    icon: Users,
-  },
-  {
-    title: "Super Dashboard",
-    url: "/super",
-    icon: Users,
-  },
-  {
-    title: "My Admin",
-    url: "/super/my-admin",
-    icon: Users,
-  },
-  {
-    title: "Upgrate request",
-    url: "#",
-    icon: Users,
-  },
-  {
-    title: "Feed Back",
-    url: "/super/feedback",
-    icon: Users,
-  },
+  { title: "Dashboard", url: "/admin", icon: Home },
+  { title: "Tables", url: "/admin/tables", icon: Calendar },
+  { title: "Cashier", url: "/admin/cashier", icon: CashRegister },
+  { title: "Kitchen", url: "/admin/kitchen", icon: ChefHat },
+  { title: "Manual Order", url: "/admin/manual-order", icon: FileText },
+  { title: "Request Waiter", url: "/admin/request-waiter", icon: HandHelping },
+  { title: "Staff Details", url: "/admin/staff-details", icon: Users },
+  { title: "Super Dashboard", url: "/super", icon: Users },
+  { title: "My Admin", url: "/super/my-admin", icon: Users },
+  { title: "Upgrate request", url: "#", icon: Users },
+  { title: "Feed Back", url: "/super/feedback", icon: Users },
 ];
 
 // Inventory submenu items
 const inventoryItems = [
-  {
-    title: "Categories",
-    url: "/admin/inventory/categories",
-    icon: Tags,
-  },
-  {
-    title: "Units",
-    url: "/admin/inventory/units",
-    icon: Ruler,
-  },
-  {
-    title: "Products",
-    url: "/admin/inventory/products",
-    icon: Package,
-  },
+  { title: "Categories", url: "/admin/inventory/categories", icon: Tags },
+  { title: "Units", url: "/admin/inventory/units", icon: Ruler },
+  { title: "Products", url: "/admin/inventory/products", icon: Package },
 ];
 
 // Reports submenu items
 const reportItems = [
-  {
-    title: "Sales",
-    url: "/admin/report/sales",
-    icon: TrendingUp,
-  },
-  {
-    title: "Purchase",
-    url: "/admin/report/purchase",
-    icon: TrendingDown,
-  },
+  { title: "Sales", url: "/admin/report/sales", icon: TrendingUp },
+  { title: "Purchase", url: "/admin/report/purchase", icon: TrendingDown },
 ];
 
 // User data
@@ -154,6 +89,14 @@ const user = {
 };
 
 export function AppSidebar() {
+  const { isMobile, setOpenMobile } = useSidebar(); // Use the hook
+
+  const handleMenuItemClick = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+  };
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -165,14 +108,13 @@ export function AppSidebar() {
               {mainItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <Link href={item.url}>
+                    <Link href={item.url} onClick={handleMenuItemClick}>
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-
               {/* Inventory collapsible section */}
               <Collapsible className="group/collapsible">
                 <SidebarMenuItem>
@@ -188,7 +130,7 @@ export function AppSidebar() {
                       {inventoryItems.map((item) => (
                         <SidebarMenuSubItem key={item.title}>
                           <SidebarMenuSubButton asChild>
-                            <Link href={item.url}>
+                            <Link href={item.url} onClick={handleMenuItemClick}>
                               <item.icon />
                               <span>{item.title}</span>
                             </Link>
@@ -199,9 +141,8 @@ export function AppSidebar() {
                   </CollapsibleContent>
                 </SidebarMenuItem>
               </Collapsible>
-
               {/* Reports collapsible section */}
-              <Collapsible  className="group/collapsible">
+              <Collapsible className="group/collapsible">
                 <SidebarMenuItem>
                   <CollapsibleTrigger asChild>
                     <SidebarMenuButton className="w-full">
@@ -215,7 +156,7 @@ export function AppSidebar() {
                       {reportItems.map((item) => (
                         <SidebarMenuSubItem key={item.title}>
                           <SidebarMenuSubButton asChild>
-                            <Link href={item.url}>
+                            <Link href={item.url} onClick={handleMenuItemClick}>
                               <item.icon />
                               <span>{item.title}</span>
                             </Link>
@@ -230,7 +171,6 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -279,26 +219,21 @@ export function AppSidebar() {
                   </div>
                 </div>
                 <DropdownMenuItem className="text-primary font-semibold hover:bg-accent">
-                  <Crown className="mr-2 h-4 w-4 text-primary" />
-                  Upgrade to Pro
+                  <Crown className="mr-2 h-4 w-4 text-primary" /> Upgrade to Pro
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <User2 className="mr-2 h-4 w-4" />
-                  Account
+                  <User2 className="mr-2 h-4 w-4" /> Account
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <CreditCard className="mr-2 h-4 w-4" />
-                  Billing
+                  <CreditCard className="mr-2 h-4 w-4" /> Billing
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Settings className="mr-2 h-4 w-4" />
-                  Settings & Privacy
+                  <Settings className="mr-2 h-4 w-4" /> Settings & Privacy
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Log out
+                  <LogOut className="mr-2 h-4 w-4" /> Log out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

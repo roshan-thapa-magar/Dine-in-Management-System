@@ -50,7 +50,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           <SidebarInset>
             <header className="flex shrink-0 items-center gap-2">
               <div className="flex items-center gap-2">
-                <SidebarTrigger />
+                <SidebarTrigger/>
                 <Breadcrumb>
                   <BreadcrumbList>
                     <BreadcrumbItem className="hidden md:block">
