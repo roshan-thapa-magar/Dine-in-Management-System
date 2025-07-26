@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import Image from "next/image";
 
 export function LoginForm({
   className,
@@ -14,10 +15,11 @@ export function LoginForm({
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
           <div className="border-r relative hidden md:block">
-            <img
+            <Image
               src="/images/login.png"
               alt="Image"
-              className="absolute inset-0 p-4 b h-full w-full object-cover"
+              fill
+              className="absolute inset-0 p-4 b object-cover"
             />
           </div>
           <form className="p-6 md:p-8">

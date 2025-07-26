@@ -1,7 +1,6 @@
 import {
   Calendar,
   Home,
-  Inbox,
   Settings,
   User2,
   ChevronUp,

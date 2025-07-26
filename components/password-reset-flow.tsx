@@ -1,7 +1,5 @@
 "use client";
-
 import type React from "react";
-
 import { useState, useEffect } from "react";
 import { ArrowRight, Check, Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -61,7 +59,7 @@ export default function PasswordResetFlow() {
 
   const validateOtp = (value: string): boolean => {
     if (value.length !== 6) {
-      setOtpError("OTP must be at least 6 characters.");
+      setOtpError("OTP must be 6 characters.");
       return false;
     }
     setOtpError(null);
@@ -149,7 +147,6 @@ export default function PasswordResetFlow() {
       newPassword,
       confirmPassword
     );
-
     if (isNewPasswordValid && isConfirmPasswordValid) {
       setCurrentStep("success");
     }
@@ -164,8 +161,8 @@ export default function PasswordResetFlow() {
             Account Recovery
           </h1>
           <p className="text-muted-foreground mb-8 text-base sm:text-lg leading-relaxed">
-            Securely reset your password in three simple steps. We'll send you a
-            one-time password to verify your email, then you can set a new
+            Securely reset your password in three simple steps. We&apos;ll send
+            you a one-time password to verify your email, then you can set a new
             password for your account.
           </p>
           <div className="space-y-6">
@@ -273,8 +270,8 @@ export default function PasswordResetFlow() {
               {currentStep === "email" && (
                 <>
                   <div className="bg-primary/10 border border-primary/20 rounded-lg p-3 sm:p-4 text-xs sm:text-sm">
-                    Enter the email address associated with your account. We'll
-                    send you a verification code.
+                    Enter the email address associated with your account.
+                    We&apos;ll send you a verification code.
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address</Label>
@@ -306,7 +303,7 @@ export default function PasswordResetFlow() {
                 <>
                   <div className="text-start p-4 rounded-md border">
                     <p className="text-xs sm:text-sm text-muted-foreground">
-                      We've sent a 6-digit verification code to
+                      We&apos;ve sent a 6-digit verification code to
                     </p>
                     <p className="font-medium text-sm sm:text-base">{email}</p>
                     <p className="text-xs sm:text-sm text-muted-foreground">
@@ -337,7 +334,7 @@ export default function PasswordResetFlow() {
                     Verify Code
                   </Button>
                   <div className="text-center text-xs sm:text-sm text-muted-foreground">
-                    {"Didn't receive the code? "}
+                    {"Didn&apos;t receive the code? "}
                     {resendTimer > 0 ? (
                       <span>Resend in {resendTimer}s</span>
                     ) : (
