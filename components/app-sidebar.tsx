@@ -23,6 +23,7 @@ import {
   BarChart3,
   ReceiptIcon as CashRegister,
 } from "lucide-react";
+
 import {
   Sidebar,
   SidebarContent,
@@ -36,8 +37,9 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-  useSidebar, // Import useSidebar hook
+  useSidebar,
 } from "@/components/ui/sidebar";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -45,11 +47,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
@@ -64,7 +68,7 @@ const mainItems = [
   { title: "Staff Details", url: "/admin/staff-details", icon: Users },
   { title: "Super Dashboard", url: "/super", icon: Users },
   { title: "My Admin", url: "/super/my-admin", icon: Users },
-  { title: "Upgrate request", url: "#", icon: Users },
+  { title: "Upgrade request", url: "#", icon: Users },
   { title: "Feed Back", url: "/super/feedback", icon: Users },
 ];
 
@@ -85,11 +89,11 @@ const reportItems = [
 const user = {
   name: "Roshan Thapa Magar",
   email: "roshanthapamagar974253@example.com",
-  avatar: "https://github.com/leerob.png",
+  avatar: "/placeholder.svg?height=32&width=32",
 };
 
 export function AppSidebar() {
-  const { isMobile, setOpenMobile } = useSidebar(); // Use the hook
+  const { isMobile, setOpenMobile } = useSidebar();
 
   const handleMenuItemClick = () => {
     if (isMobile) {
@@ -115,6 +119,7 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+
               {/* Inventory collapsible section */}
               <Collapsible className="group/collapsible">
                 <SidebarMenuItem>
@@ -141,6 +146,7 @@ export function AppSidebar() {
                   </CollapsibleContent>
                 </SidebarMenuItem>
               </Collapsible>
+
               {/* Reports collapsible section */}
               <Collapsible className="group/collapsible">
                 <SidebarMenuItem>
@@ -171,6 +177,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>

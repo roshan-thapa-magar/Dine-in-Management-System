@@ -298,8 +298,10 @@ export default function Page() {
   ];
 
   return (
-    <div className="space-y-6 p-4">
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div className="flex flex-col h-full">
+      {/* Header Section - Fixed */}
+        <div className="flex-shrink-0 p-4">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="relative w-full sm:w-1/2">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
@@ -335,158 +337,169 @@ export default function Page() {
             Add Staff
           </Button>
         </div>
+        </div>
       </div>
-      <div className="border rounded-md overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[50px]">
-                <Checkbox
-                  checked={allRowsSelected}
-                  onCheckedChange={handleSelectAll}
-                  aria-label="Select all"
-                  className="translate-y-[2px]"
-                />
-              </TableHead>
-              {columns
-                .filter((col) => columnVisibility[col.id])
-                .map((column) => (
-                  <TableHead
-                    key={column.id}
-                    className={column.align === "center" ? "text-center" : ""}
-                  >
-                    {column.name}
-                  </TableHead>
-                ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {paginatedStaff.map((s) => (
-              <TableRow key={s.sn}>
-                <TableCell>
+
+      {/* Staff Section - Scrollable */}
+      <div className="flex-1 overflow-auto px-4">
+        <div className="border rounded-md">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[50px]">
                   <Checkbox
-                    checked={selectedRows.has(s.sn)}
-                    onCheckedChange={(checked) =>
-                      handleSelectRow(s.sn, checked as boolean)
-                    }
-                    aria-label={`Select row ${s.sn}`}
+                    checked={allRowsSelected}
+                    onCheckedChange={handleSelectAll}
+                    aria-label="Select all"
                     className="translate-y-[2px]"
                   />
-                </TableCell>
-                {columnVisibility.sn && (
-                  <TableCell className="font-medium">{s.sn}</TableCell>
-                )}
-                {columnVisibility.staffName && (
-                  <TableCell>{s.staffName}</TableCell>
-                )}
-                {columnVisibility.email && <TableCell>{s.email}</TableCell>}
-                {columnVisibility.position && (
-                  <TableCell>{s.position}</TableCell>
-                )}
-                {columnVisibility.address && <TableCell>{s.address}</TableCell>}
-                {columnVisibility.phone && <TableCell>{s.phone}</TableCell>}
-                {columnVisibility.salary && <TableCell>{s.salary}</TableCell>}
-                {columnVisibility.role && <TableCell>{s.role}</TableCell>}
-                {columnVisibility.image && (
+                </TableHead>
+                {columns
+                  .filter((col) => columnVisibility[col.id])
+                  .map((column) => (
+                    <TableHead
+                      key={column.id}
+                      className={column.align === "center" ? "text-center" : ""}
+                    >
+                      {column.name}
+                    </TableHead>
+                  ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {paginatedStaff.map((s) => (
+                <TableRow key={s.sn}>
                   <TableCell>
-                    <Image
-                      src={s.image || "/placeholder.svg"}
-                      alt={s.staffName}
-                      width={32} 
-                      height={32} 
-                      className="object-cover rounded-full"
+                    <Checkbox
+                      checked={selectedRows.has(s.sn)}
+                      onCheckedChange={(checked) =>
+                        handleSelectRow(s.sn, checked as boolean)
+                      }
+                      aria-label={`Select row ${s.sn}`}
+                      className="translate-y-[2px]"
                     />
                   </TableCell>
-                )}
-                {columnVisibility.status && <TableCell>{s.status}</TableCell>}
-                {columnVisibility.action && (
-                  <TableCell className="flex items-center justify-center gap-2">
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                      <Pencil className="h-4 w-4" />
-                      <span className="sr-only">Edit</span>
-                    </Button>
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                      <Trash className="h-4 w-4" />
-                      <span className="sr-only">Delete</span>
-                    </Button>
-                  </TableCell>
-                )}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4">
-        <div className="text-sm">
-          {selectedRows.size} of {staff.length} row(s) selected.
+                  {columnVisibility.sn && (
+                    <TableCell className="font-medium">{s.sn}</TableCell>
+                  )}
+                  {columnVisibility.staffName && (
+                    <TableCell>{s.staffName}</TableCell>
+                  )}
+                  {columnVisibility.email && <TableCell>{s.email}</TableCell>}
+                  {columnVisibility.position && (
+                    <TableCell>{s.position}</TableCell>
+                  )}
+                  {columnVisibility.address && (
+                    <TableCell>{s.address}</TableCell>
+                  )}
+                  {columnVisibility.phone && <TableCell>{s.phone}</TableCell>}
+                  {columnVisibility.salary && <TableCell>{s.salary}</TableCell>}
+                  {columnVisibility.role && <TableCell>{s.role}</TableCell>}
+                  {columnVisibility.image && (
+                    <TableCell>
+                      <Image
+                        src={s.image || "/placeholder.svg"}
+                        alt={s.staffName}
+                        width={32}
+                        height={32}
+                        className="object-cover rounded-full"
+                      />
+                    </TableCell>
+                  )}
+                  {columnVisibility.status && <TableCell>{s.status}</TableCell>}
+                  {columnVisibility.action && (
+                    <TableCell className="flex items-center justify-center gap-2">
+                      <Button variant="ghost" size="icon" className="h-8 w-8">
+                        <Pencil className="h-4 w-4" />
+                        <span className="sr-only">Edit</span>
+                      </Button>
+                      <Button variant="ghost" size="icon" className="h-8 w-8">
+                        <Trash className="h-4 w-4" />
+                        <span className="sr-only">Delete</span>
+                      </Button>
+                    </TableCell>
+                  )}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <span className="text-sm">Rows per page</span>
-            <Select
-              value={String(rowsPerPage)}
-              onValueChange={(value) => {
-                setRowsPerPage(Number(value));
-                setCurrentPage(1); // Reset to first page when rows per page changes
-              }}
-            >
-              <SelectTrigger className="w-[70px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="5">5</SelectItem>
-                <SelectItem value="10">10</SelectItem>
-                <SelectItem value="20">20</SelectItem>
-                <SelectItem value="50">50</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+      </div>
+
+      {/* Footer Section - Fixed */}
+      <div className="flex-shrink-0 border-t bg-background p-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-sm">
-            Page {currentPage} of {totalPages}
+            {selectedRows.size} of {staff.length} row(s) selected.
           </div>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="icon"
-              className="h-8 w-8 bg-transparent"
-              onClick={() => setCurrentPage(1)}
-              disabled={currentPage === 1}
-            >
-              <ChevronsLeft className="h-4 w-4" />
-              <span className="sr-only">First page</span>
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="h-8 w-8 bg-transparent"
-              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-              disabled={currentPage === 1}
-            >
-              <ChevronLeft className="h-4 w-4" />
-              <span className="sr-only">Previous page</span>
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="h-8 w-8 bg-transparent"
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(totalPages, prev + 1))
-              }
-              disabled={currentPage === totalPages}
-            >
-              <ChevronRight className="h-4 w-4" />
-              <span className="sr-only">Next page</span>
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="h-8 w-8 bg-transparent"
-              onClick={() => setCurrentPage(totalPages)}
-              disabled={currentPage === totalPages}
-            >
-              <ChevronsRight className="h-4 w-4" />
-              <span className="sr-only">Last page</span>
-            </Button>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <span className="text-sm">Rows per page</span>
+              <Select
+                value={String(rowsPerPage)}
+                onValueChange={(value) => {
+                  setRowsPerPage(Number(value));
+                  setCurrentPage(1);
+                }}
+              >
+                <SelectTrigger className="w-[70px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="5">5</SelectItem>
+                  <SelectItem value="10">10</SelectItem>
+                  <SelectItem value="20">20</SelectItem>
+                  <SelectItem value="50">50</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="text-sm">
+              Page {currentPage} of {totalPages}
+            </div>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-8 w-8 bg-transparent"
+                onClick={() => setCurrentPage(1)}
+                disabled={currentPage === 1}
+              >
+                <ChevronsLeft className="h-4 w-4" />
+                <span className="sr-only">First page</span>
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-8 w-8 bg-transparent"
+                onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+              >
+                <ChevronLeft className="h-4 w-4" />
+                <span className="sr-only">Previous page</span>
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-8 w-8 bg-transparent"
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(totalPages, prev + 1))
+                }
+                disabled={currentPage === totalPages}
+              >
+                <ChevronRight className="h-4 w-4" />
+                <span className="sr-only">Next page</span>
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-8 w-8 bg-transparent"
+                onClick={() => setCurrentPage(totalPages)}
+                disabled={currentPage === totalPages}
+              >
+                <ChevronsRight className="h-4 w-4" />
+                <span className="sr-only">Last page</span>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
