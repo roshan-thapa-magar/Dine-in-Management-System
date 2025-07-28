@@ -66,7 +66,7 @@ export default function Page() {
       </div>
 
       {/* Content Section */}
-      <div className="flex-1 overflow-y-auto pl-4 pb-6 hide-scrollbar ">
+      <div className="flex-1 overflow-y-auto pl-4 sm:pr-4 pb-6 hide-scrollbar ">
         {["A", "B", "C", "D"].map((deptLetter) => (
           <div key={deptLetter} className="mb-6">
             <Label className="block mb-2 text-md font-medium">

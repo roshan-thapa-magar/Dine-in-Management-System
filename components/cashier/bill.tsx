@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function page() {
+export default function bill() {
   return (
     <div>
-      Welcome to manual order
+      Bill area
     </div>
   )
 }
