@@ -51,7 +51,7 @@ export default function Page() {
           </div>
 
           {/* Legend */}
-          <div className="flex items-center space-x-4 flex-wrap gap-1">
+          <div className="flex items-center space-x-2 flex-wrap gap-1">
             {legendItems.map((item) => (
               <div key={item.label} className="flex items-center space-x-1">
                 <span
@@ -66,7 +66,7 @@ export default function Page() {
       </div>
 
       {/* Content Section */}
-      <div className="flex-1 overflow-auto px-4 pb-6">
+      <div className="flex-1 overflow-y-auto pl-4 pb-6">
         {["A", "B", "C", "D"].map((deptLetter) => (
           <div key={deptLetter} className="mb-6">
             <Label className="block mb-2 text-md font-medium">
