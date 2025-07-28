@@ -165,7 +165,7 @@ export default function Page() {
       </div>
 
       {/* Table Section - Scrollable */}
-      <div className="flex-1 overflow-auto px-4">
+      <div className="flex-1 overflow-auto px-4 hide-scrollbar ">
         <div className="border rounded-md">
           <Table>
             <TableHeader>

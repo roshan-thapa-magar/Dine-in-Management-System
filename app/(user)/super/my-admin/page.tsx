@@ -301,137 +301,141 @@ export default function Page() {
   ];
 
   return (
-     <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full">
       {/* Header Section - Fixed */}
       <div className="flex-shrink-0 p-4">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-        <div className="relative w-full sm:w-1/2">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input
-            type="text"
-            placeholder="Search by name..."
-            className="pl-9 pr-4 py-2 h-10 w-full rounded-md"
-          />
-        </div>
-        <div className="flex gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="h-10 px-4 bg-transparent">
-                <Settings2 className="w-4 h-4 mr-2" />
-                Customize Columns
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {columns.map((column) => (
-                <DropdownMenuCheckboxItem
-                  key={column.id}
-                  checked={columnVisibility[column.id]}
-                  onCheckedChange={(checked) =>
-                    handleColumnVisibilityChange(column.id, checked)
-                  }
-                >
-                  {column.name}
-                </DropdownMenuCheckboxItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <Button variant={"outline"} className="h-10 px-4">
-            <Plus className="w-4 h-4 mr-2" />
-            Add Admin
-          </Button>
-        </div>
+          <div className="relative w-full sm:w-1/2">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Search by name..."
+              className="pl-9 pr-4 py-2 h-10 w-full rounded-md"
+            />
+          </div>
+          <div className="flex gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="h-10 px-4 bg-transparent">
+                  <Settings2 className="w-4 h-4 mr-2" />
+                  Customize Columns
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {columns.map((column) => (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    checked={columnVisibility[column.id]}
+                    onCheckedChange={(checked) =>
+                      handleColumnVisibilityChange(column.id, checked)
+                    }
+                  >
+                    {column.name}
+                  </DropdownMenuCheckboxItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Button variant={"outline"} className="h-10 px-4">
+              <Plus className="w-4 h-4 mr-2" />
+              Add Admin
+            </Button>
+          </div>
         </div>
       </div>
 
       {/* Table Section - Scrollable */}
-        <div className="flex-1 overflow-auto px-4">
+      <div className="flex-1 overflow-auto px-4 hide-scrollbar ">
         <div className="border rounded-md">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[50px]">
-                <Checkbox
-                  checked={allRowsSelected}
-                  onCheckedChange={handleSelectAll}
-                  aria-label="Select all"
-                  className="translate-y-[2px]"
-                />
-              </TableHead>
-              {columns
-                .filter((col) => columnVisibility[col.id])
-                .map((column) => (
-                  <TableHead
-                    key={column.id}
-                    className={column.align === "center" ? "text-center" : ""}
-                  >
-                    {column.name}
-                  </TableHead>
-                ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {paginatedAdmins.map((admin) => (
-              <TableRow key={admin.sn}>
-                <TableCell>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[50px]">
                   <Checkbox
-                    checked={selectedRows.has(admin.sn)}
-                    onCheckedChange={(checked) =>
-                      handleSelectRow(admin.sn, checked as boolean)
-                    }
-                    aria-label={`Select row ${admin.sn}`}
+                    checked={allRowsSelected}
+                    onCheckedChange={handleSelectAll}
+                    aria-label="Select all"
                     className="translate-y-[2px]"
                   />
-                </TableCell>
-                {columnVisibility.sn && (
-                  <TableCell className="font-medium">{admin.sn}</TableCell>
-                )}
-                {columnVisibility.userName && (
-                  <TableCell>{admin.userName}</TableCell>
-                )}
-                {columnVisibility.email && <TableCell>{admin.email}</TableCell>}
-                {columnVisibility.phone && <TableCell>{admin.phone}</TableCell>}
-                {columnVisibility.address && (
-                  <TableCell>{admin.address}</TableCell>
-                )}
-                {columnVisibility.restaurantName && (
-                  <TableCell>{admin.restaurantName}</TableCell>
-                )}
-                {columnVisibility.joinDate && (
-                  <TableCell>{admin.joinDate}</TableCell>
-                )}
-                {columnVisibility.endDate && (
-                  <TableCell>{admin.endDate}</TableCell>
-                )}
-                {columnVisibility.image && (
+                </TableHead>
+                {columns
+                  .filter((col) => columnVisibility[col.id])
+                  .map((column) => (
+                    <TableHead
+                      key={column.id}
+                      className={column.align === "center" ? "text-center" : ""}
+                    >
+                      {column.name}
+                    </TableHead>
+                  ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {paginatedAdmins.map((admin) => (
+                <TableRow key={admin.sn}>
                   <TableCell>
-                    <Image
-                      src={admin.image || "/placeholder.svg"}
-                      alt={admin.userName}
-                      width={32}
-                      height={32}
-                      className="object-cover rounded-full"
+                    <Checkbox
+                      checked={selectedRows.has(admin.sn)}
+                      onCheckedChange={(checked) =>
+                        handleSelectRow(admin.sn, checked as boolean)
+                      }
+                      aria-label={`Select row ${admin.sn}`}
+                      className="translate-y-[2px]"
                     />
                   </TableCell>
-                )}
-                {columnVisibility.status && (
-                  <TableCell>{admin.status}</TableCell>
-                )}
-                {columnVisibility.action && (
-                  <TableCell className="flex items-center justify-center gap-2">
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                      <Pencil className="h-4 w-4" />
-                      <span className="sr-only">Edit</span>
-                    </Button>
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                      <Trash className="h-4 w-4" />
-                      <span className="sr-only">Delete</span>
-                    </Button>
-                  </TableCell>
-                )}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+                  {columnVisibility.sn && (
+                    <TableCell className="font-medium">{admin.sn}</TableCell>
+                  )}
+                  {columnVisibility.userName && (
+                    <TableCell>{admin.userName}</TableCell>
+                  )}
+                  {columnVisibility.email && (
+                    <TableCell>{admin.email}</TableCell>
+                  )}
+                  {columnVisibility.phone && (
+                    <TableCell>{admin.phone}</TableCell>
+                  )}
+                  {columnVisibility.address && (
+                    <TableCell>{admin.address}</TableCell>
+                  )}
+                  {columnVisibility.restaurantName && (
+                    <TableCell>{admin.restaurantName}</TableCell>
+                  )}
+                  {columnVisibility.joinDate && (
+                    <TableCell>{admin.joinDate}</TableCell>
+                  )}
+                  {columnVisibility.endDate && (
+                    <TableCell>{admin.endDate}</TableCell>
+                  )}
+                  {columnVisibility.image && (
+                    <TableCell>
+                      <Image
+                        src={admin.image || "/placeholder.svg"}
+                        alt={admin.userName}
+                        width={32}
+                        height={32}
+                        className="object-cover rounded-full"
+                      />
+                    </TableCell>
+                  )}
+                  {columnVisibility.status && (
+                    <TableCell>{admin.status}</TableCell>
+                  )}
+                  {columnVisibility.action && (
+                    <TableCell className="flex items-center justify-center gap-2">
+                      <Button variant="ghost" size="icon" className="h-8 w-8">
+                        <Pencil className="h-4 w-4" />
+                        <span className="sr-only">Edit</span>
+                      </Button>
+                      <Button variant="ghost" size="icon" className="h-8 w-8">
+                        <Trash className="h-4 w-4" />
+                        <span className="sr-only">Delete</span>
+                      </Button>
+                    </TableCell>
+                  )}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       </div>
       {/* Footer Section - Fixed */}
