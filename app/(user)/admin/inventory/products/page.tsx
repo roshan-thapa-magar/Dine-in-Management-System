@@ -46,7 +46,7 @@ export default function Page() {
         productName: "Apple",
         category: "Fruit",
         units: "kg",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "In Stock",
       },
       {
@@ -54,7 +54,7 @@ export default function Page() {
         productName: "Milk",
         category: "Dairy",
         units: "Liter",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "Low Stock",
       },
       {
@@ -62,7 +62,7 @@ export default function Page() {
         productName: "Bread",
         category: "Bakery",
         units: "pc",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "Out of Stock",
       },
       {
@@ -70,7 +70,7 @@ export default function Page() {
         productName: "Chicken Breast",
         category: "Meat",
         units: "kg",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "In Stock",
       },
       {
@@ -78,7 +78,7 @@ export default function Page() {
         productName: "Eggs",
         category: "Dairy",
         units: "Dozen",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "In Stock",
       },
       {
@@ -86,7 +86,7 @@ export default function Page() {
         productName: "Rice",
         category: "Grains",
         units: "kg",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "In Stock",
       },
       {
@@ -94,7 +94,7 @@ export default function Page() {
         productName: "Tomatoes",
         category: "Vegetable",
         units: "kg",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "Low Stock",
       },
       {
@@ -102,7 +102,7 @@ export default function Page() {
         productName: "Cheese",
         category: "Dairy",
         units: "pc",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "In Stock",
       },
       {
@@ -110,7 +110,7 @@ export default function Page() {
         productName: "Pasta",
         category: "Grains",
         units: "pc",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "In Stock",
       },
       {
@@ -118,7 +118,7 @@ export default function Page() {
         productName: "Orange Juice",
         category: "Beverage",
         units: "Liter",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "In Stock",
       },
       {
@@ -126,7 +126,7 @@ export default function Page() {
         productName: "Salmon",
         category: "Seafood",
         units: "kg",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "Low Stock",
       },
       {
@@ -134,7 +134,7 @@ export default function Page() {
         productName: "Potatoes",
         category: "Vegetable",
         units: "kg",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "In Stock",
       },
       {
@@ -142,7 +142,7 @@ export default function Page() {
         productName: "Yogurt",
         category: "Dairy",
         units: "pc",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "In Stock",
       },
       {
@@ -150,7 +150,7 @@ export default function Page() {
         productName: "Coffee",
         category: "Beverage",
         units: "pc",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "In Stock",
       },
       {
@@ -158,7 +158,7 @@ export default function Page() {
         productName: "Bananas",
         category: "Fruit",
         units: "kg",
-        image: "https://github.com/leerob.png",
+        image: "https://github.com/evilrabbit.png",
         status: "In Stock",
       },
     ],

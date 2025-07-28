@@ -89,7 +89,7 @@ const reportItems = [
 const user = {
   name: "Roshan Thapa Magar",
   email: "roshanthapamagar974253@example.com",
-  avatar: "/placeholder.svg?height=32&width=32",
+  avatar: "https://github.com/evilrabbit.png",
 };
 
 export function AppSidebar() {
