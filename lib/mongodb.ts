@@ -8,19 +8,15 @@ if (!MONGODB_URI) {
   );
 }
 
-// Define a global type for mongoose cache
 type MongooseCache = {
   conn: Mongoose | null;
   promise: Promise<Mongoose> | null;
 };
 
-// Extend NodeJS global object
 declare global {
-  // eslint-disable-next-line no-var
   var mongooseCache: MongooseCache | undefined;
 }
 
-// Use the global cache or initialize it
 const cached: MongooseCache = global.mongooseCache || {
   conn: null,
   promise: null,
@@ -43,6 +39,6 @@ export const dbConnect = async () => {
   }
 
   cached.conn = await cached.promise;
-  global.mongooseCache = cached; // ✅ Save to global
+  global.mongooseCache = cached;
   return cached.conn;
 };
