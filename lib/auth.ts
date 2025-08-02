@@ -39,13 +39,13 @@ export const authOptions: NextAuthOptions = {
         // ✅ 2. Find user by email only
         const user = await UserModel.findOne({ email });
         if (!user) {
-          throw new Error("Invalid email or password");
+          throw new Error("Invalid email or passwor");
         }
 
         // ✅ 3. Compare the entered password with hashed password in DB
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-          throw new Error("Invalid email or password");
+          throw new Error("Incorrect password. Try again.");
         }
 
         // ✅ 4. Return user object for JWT
@@ -65,7 +65,7 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id;
         token.name = user.name;
         token.email = user.email;
-        token.role = user.role; // Attach the role to the token
+        token.role = user.role;
       }
       return token;
     },
@@ -74,7 +74,7 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.name = token.name;
         session.user.email = token.email;
-        session.user.role = token.role; // Attach the role to the session
+        session.user.role = token.role;
       }
       return session;
     },

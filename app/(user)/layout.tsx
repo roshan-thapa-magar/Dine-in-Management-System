@@ -3,11 +3,11 @@ import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { AppHeader } from "@/components/app-header";
 import type { ReactNode } from "react";
-import { SessionProvider } from "next-auth/react";
+import ProtectedLayout from "@/components/ProtectedLayout";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <SessionProvider>
+    <ProtectedLayout>
       <SidebarProvider>
         <div className="flex h-screen w-full">
           <AppSidebar />
@@ -17,6 +17,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </SidebarInset>
         </div>
       </SidebarProvider>
-    </SessionProvider>
+    </ProtectedLayout>
   );
 }

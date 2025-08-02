@@ -310,7 +310,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
-// Define all main menu items
 const mainItems = [
   { title: "Dashboard", url: "/admin", icon: Home },
   { title: "Tables", url: "/admin/tables", icon: Calendar },
@@ -324,20 +323,17 @@ const mainItems = [
   { title: "Feed Back", url: "/super/feedback", icon: Users },
 ];
 
-// Inventory submenu items
 const inventoryItems = [
   { title: "Categories", url: "/admin/inventory/categories", icon: Tags },
   { title: "Units", url: "/admin/inventory/units", icon: Ruler },
   { title: "Products", url: "/admin/inventory/products", icon: Package },
 ];
 
-// Reports submenu items
 const reportItems = [
   { title: "Sales", url: "/admin/report/sales", icon: TrendingUp },
   { title: "Purchase", url: "/admin/report/purchase", icon: TrendingDown },
 ];
 
-// Role-based allowed URLs
 const roleAccess: Record<string, string[]> = {
   admin: [
     "/admin",
@@ -358,11 +354,10 @@ const roleAccess: Record<string, string[]> = {
   waiter: ["/admin", "/admin/cashier", "/admin/request-waiter"],
 };
 
-// Fallback user info in case session not loaded yet
 const fallbackUser = {
   name: "Guest",
   email: "N/A",
-  avatar: "/placeholder.svg",
+  avatar: "https://github.com/evilrabbit.png",
 };
 
 export function AppSidebar() {
@@ -372,7 +367,6 @@ export function AppSidebar() {
 
   const allowedPaths = roleAccess[userRole] || [];
 
-  // Filter menu items based on allowed paths
   const filteredMainItems = mainItems.filter((item) =>
     allowedPaths.includes(item.url)
   );
@@ -404,7 +398,6 @@ export function AppSidebar() {
           <SidebarGroupLabel>{user.name}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {/* Main menu items */}
               {filteredMainItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
@@ -416,7 +409,6 @@ export function AppSidebar() {
                 </SidebarMenuItem>
               ))}
 
-              {/* Inventory submenu */}
               {filteredInventoryItems.length > 0 && (
                 <Collapsible className="group/collapsible">
                   <SidebarMenuItem>
@@ -448,7 +440,6 @@ export function AppSidebar() {
                 </Collapsible>
               )}
 
-              {/* Reports submenu */}
               {filteredReportItems.length > 0 && (
                 <Collapsible className="group/collapsible">
                   <SidebarMenuItem>
@@ -529,7 +520,6 @@ export function AppSidebar() {
                     </span>
                   </div>
                 </div>
-                {/* You can add role-based special items here */}
                 {userRole === "admin" && (
                   <DropdownMenuItem className="text-primary font-semibold hover:bg-accent">
                     <Crown className="mr-2 h-4 w-4 text-primary" /> Upgrade to

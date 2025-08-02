@@ -398,7 +398,7 @@ export default function Page() {
                   {columnVisibility.image && (
                     <TableCell>
                       <Image
-                        src={s.image || "/placeholder.svg"}
+                        src={s.image || "https://github.com/evilrabbit.png"}
                         alt={s.staffName}
                         width={32}
                         height={32}
