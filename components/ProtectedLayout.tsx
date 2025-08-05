@@ -8,6 +8,7 @@ const roleAccess: Record<string, string[]> = {
   admin: [
     "/admin",
     "/admin/tables",
+    "/admin/tables/department",
     "/admin/cashier",
     "/admin/kitchen",
     "/admin/request-waiter",

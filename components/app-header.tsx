@@ -17,6 +17,7 @@ import { ToggleTheme } from "./toggle-theme";
 const routeNames: Record<string, string> = {
   "/admin": "Dashboard",
   "/admin/tables": "Tables",
+  "/admin/tables/department":"Department",
   "/admin/cashier": "Cashier",
   "/admin/kitchen": "Kitchen",
   "/admin/manual-order": "Manual Order",

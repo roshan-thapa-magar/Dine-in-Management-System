@@ -249,10 +249,7 @@
 //   );
 // }
 
-
-
 "use client";
-
 import {
   Calendar,
   Home,
@@ -275,7 +272,6 @@ import {
   BarChart3,
   ReceiptIcon as CashRegister,
 } from "lucide-react";
-
 import {
   Sidebar,
   SidebarContent,
@@ -291,7 +287,6 @@ import {
   SidebarMenuSubItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -299,20 +294,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
+import { usePathname } from "next/navigation"; // Import usePathname
 
 const mainItems = [
   { title: "Dashboard", url: "/admin", icon: Home },
-  { title: "Tables", url: "/admin/tables", icon: Calendar },
   { title: "Cashier", url: "/admin/cashier", icon: CashRegister },
   { title: "Kitchen", url: "/admin/kitchen", icon: ChefHat },
   { title: "Request Waiter", url: "/admin/request-waiter", icon: HandHelping },
@@ -322,22 +315,24 @@ const mainItems = [
   { title: "Upgrade request", url: "/admin/upgrade-plan", icon: Users },
   { title: "Feed Back", url: "/super/feedback", icon: Users },
 ];
-
 const inventoryItems = [
   { title: "Categories", url: "/admin/inventory/categories", icon: Tags },
   { title: "Units", url: "/admin/inventory/units", icon: Ruler },
   { title: "Products", url: "/admin/inventory/products", icon: Package },
 ];
-
 const reportItems = [
   { title: "Sales", url: "/admin/report/sales", icon: TrendingUp },
   { title: "Purchase", url: "/admin/report/purchase", icon: TrendingDown },
 ];
-
+const tableItems = [
+  { title: "Tables", url: "/admin/tables", icon: Calendar },
+  { title: "Department", url: "/admin/tables/department", icon: TrendingDown },
+];
 const roleAccess: Record<string, string[]> = {
   admin: [
     "/admin",
     "/admin/tables",
+    "/admin/tables/department",
     "/admin/cashier",
     "/admin/kitchen",
     "/admin/request-waiter",
@@ -353,44 +348,39 @@ const roleAccess: Record<string, string[]> = {
   kitchen: ["/admin/kitchen"],
   waiter: ["/admin", "/admin/cashier", "/admin/request-waiter"],
 };
-
 const fallbackUser = {
   name: "Guest",
   email: "N/A",
   avatar: "https://github.com/evilrabbit.png",
 };
-
 export function AppSidebar() {
   const { isMobile, setOpenMobile } = useSidebar();
   const { data: session } = useSession();
+  const pathname = usePathname(); // Get current pathname
   const userRole = session?.user?.role || "guest";
-
   const allowedPaths = roleAccess[userRole] || [];
-
   const filteredMainItems = mainItems.filter((item) =>
     allowedPaths.includes(item.url)
   );
-
   const filteredInventoryItems = inventoryItems.filter((item) =>
     allowedPaths.includes(item.url)
   );
-
   const filteredReportItems = reportItems.filter((item) =>
     allowedPaths.includes(item.url)
   );
-
+  const filteredTableItems = tableItems.filter((item) =>
+    allowedPaths.includes(item.url)
+  );
   const handleMenuItemClick = () => {
     if (isMobile) {
       setOpenMobile(false);
     }
   };
-
   const user = {
     name: session?.user?.name || fallbackUser.name,
     email: session?.user?.email || fallbackUser.email,
     avatar: session?.user?.image || fallbackUser.avatar,
   };
-
   return (
     <Sidebar>
       <SidebarContent>
@@ -400,7 +390,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {filteredMainItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild isActive={pathname === item.url}>
                     <Link href={item.url} onClick={handleMenuItemClick}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -408,22 +398,24 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-
-              {filteredInventoryItems.length > 0 && (
+              {filteredTableItems.length > 0 && (
                 <Collapsible className="group/collapsible">
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton className="w-full">
-                        <ShoppingCart />
-                        <span>Inventory</span>
+                        <BarChart3 />
+                        <span>View Tables</span>
                         <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
                     <CollapsibleContent>
                       <SidebarMenuSub>
-                        {filteredInventoryItems.map((item) => (
+                        {filteredTableItems.map((item) => (
                           <SidebarMenuSubItem key={item.title}>
-                            <SidebarMenuSubButton asChild>
+                            <SidebarMenuSubButton
+                              asChild
+                              isActive={pathname === item.url}
+                            >
                               <Link
                                 href={item.url}
                                 onClick={handleMenuItemClick}
@@ -439,7 +431,39 @@ export function AppSidebar() {
                   </SidebarMenuItem>
                 </Collapsible>
               )}
-
+              {filteredInventoryItems.length > 0 && (
+                <Collapsible className="group/collapsible">
+                  <SidebarMenuItem>
+                    <CollapsibleTrigger asChild>
+                      <SidebarMenuButton className="w-full">
+                        <ShoppingCart />
+                        <span>Inventory</span>
+                        <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                      </SidebarMenuButton>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                      <SidebarMenuSub>
+                        {filteredInventoryItems.map((item) => (
+                          <SidebarMenuSubItem key={item.title}>
+                            <SidebarMenuSubButton
+                              asChild
+                              isActive={pathname === item.url}
+                            >
+                              <Link
+                                href={item.url}
+                                onClick={handleMenuItemClick}
+                              >
+                                <item.icon />
+                                <span>{item.title}</span>
+                              </Link>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        ))}
+                      </SidebarMenuSub>
+                    </CollapsibleContent>
+                  </SidebarMenuItem>
+                </Collapsible>
+              )}
               {filteredReportItems.length > 0 && (
                 <Collapsible className="group/collapsible">
                   <SidebarMenuItem>
@@ -454,7 +478,10 @@ export function AppSidebar() {
                       <SidebarMenuSub>
                         {filteredReportItems.map((item) => (
                           <SidebarMenuSubItem key={item.title}>
-                            <SidebarMenuSubButton asChild>
+                            <SidebarMenuSubButton
+                              asChild
+                              isActive={pathname === item.url}
+                            >
                               <Link
                                 href={item.url}
                                 onClick={handleMenuItemClick}
@@ -474,7 +501,6 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -486,7 +512,10 @@ export function AppSidebar() {
                   aria-label="Open user menu"
                 >
                   <Avatar className="h-8 w-8 rounded-full">
-                    <AvatarImage src={user.avatar} alt={user.name} />
+                    <AvatarImage
+                      src={user.avatar || "/placeholder.svg"}
+                      alt={user.name}
+                    />
                     <AvatarFallback className="rounded-lg">
                       {user.name.charAt(0) || "G"}
                     </AvatarFallback>
@@ -501,14 +530,17 @@ export function AppSidebar() {
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="min-w-56 rounded-lg w-[--radix-dropdown-menu-trigger-width]"
+                className="min-w-56 rounded-lg w-(--radix-dropdown-menu-trigger-width)"
                 side="bottom"
                 align="start"
                 sideOffset={4}
               >
                 <div className="flex items-center gap-3 p-3 border-b">
                   <Avatar className="h-8 w-8 rounded-full">
-                    <AvatarImage src={user.avatar} alt={user.name} />
+                    <AvatarImage
+                      src={user.avatar || "/placeholder.svg"}
+                      alt={user.name}
+                    />
                     <AvatarFallback className="rounded-lg">
                       {user.name.charAt(0) || "G"}
                     </AvatarFallback>
