@@ -81,8 +81,8 @@ const tableItems = [
 ];
 
 const staffDetails = [
-  { title: "Staff Details", url: "/admin/staff/details", icon: Users },
-  { title: "Attendance", url: "/admin/staff/attendance", icon: TrendingUp },
+  { title: "Staff Details", url: "/admin/staffs", icon: Users },
+  { title: "Attendance", url: "/admin/staffs/attendance", icon: TrendingUp },
 ];
 
 const roleAccess: Record<string, string[]> = {
@@ -93,8 +93,8 @@ const roleAccess: Record<string, string[]> = {
     "/admin/cashier",
     "/admin/kitchen",
     "/admin/request-waiter",
-    "/admin/staff/details",
-    "/admin/staff/attendance", // Corrected path here
+    "/admin/staffs",
+    "/admin/staffs/attendance", // Corrected path here
     "/admin/inventory/categories",
     "/admin/inventory/units",
     "/admin/inventory/products",

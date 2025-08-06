@@ -11,8 +11,8 @@ const roleAccess: Record<string, string[]> = {
     "/admin/cashier",
     "/admin/kitchen",
     "/admin/request-waiter",
-    "/admin/staff/details",
-    "/admin/staff/attendance", // Corrected path here as well for consistency
+    "/admin/staffs",
+    "/admin/staffs/attendance", // Corrected path here as well for consistency
     "/admin/inventory/categories",
     "/admin/inventory/units",
     "/admin/inventory/products",

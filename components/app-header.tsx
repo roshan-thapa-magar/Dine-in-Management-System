@@ -21,8 +21,8 @@ const routeNames: Record<string, string> = {
   "/admin/kitchen": "Kitchen",
   "/admin/manual-order": "Manual Order",
   "/admin/request-waiter": "Request Waiter",
-  "/admin/staff/details": "Staff Details",
-  "/admin/staff/attendance": "Staff Attendance", // Corrected path here
+  "/admin/staffs": "Staff Details",
+  "/admin/staffs/attendance": "Staff Attendance", // Corrected path here
   "/super": "Super Dashboard",
   "/super/my-admin": "My Admin",
   "/super/feedback": "Feedback",
