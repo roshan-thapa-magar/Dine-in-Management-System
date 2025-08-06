@@ -1,5 +1,4 @@
 "use client";
-
 import { usePathname } from "next/navigation";
 import { Bell, Globe } from "lucide-react";
 import {
@@ -17,12 +16,13 @@ import { ToggleTheme } from "./toggle-theme";
 const routeNames: Record<string, string> = {
   "/admin": "Dashboard",
   "/admin/tables": "Tables",
-  "/admin/tables/department":"Department",
+  "/admin/tables/department": "Department",
   "/admin/cashier": "Cashier",
   "/admin/kitchen": "Kitchen",
   "/admin/manual-order": "Manual Order",
   "/admin/request-waiter": "Request Waiter",
-  "/admin/staff-details": "Staff Details",
+  "/admin/staff/details": "Staff Details",
+  "/admin/staff/attendance": "Staff Attendance", // Corrected path here
   "/super": "Super Dashboard",
   "/super/my-admin": "My Admin",
   "/super/feedback": "Feedback",
@@ -53,7 +53,6 @@ export function AppHeader() {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-
       {/* Right-side icons */}
       <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon">
