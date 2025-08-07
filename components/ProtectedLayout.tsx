@@ -12,7 +12,7 @@ const roleAccess: Record<string, string[]> = {
     "/admin/kitchen",
     "/admin/request-waiter",
     "/admin/staffs",
-    "/admin/staffs/attendance", // Corrected path here as well for consistency
+    "/admin/staffs/attendance",
     "/admin/inventory/categories",
     "/admin/inventory/units",
     "/admin/inventory/products",
@@ -25,13 +25,12 @@ const roleAccess: Record<string, string[]> = {
   waiter: ["/admin", "/admin/cashier", "/admin/request-waiter"],
 };
 
-// Map user role to their base dashboard path
 const roleDashboardPath: Record<string, string> = {
   admin: "/admin",
   super: "/super",
   kitchen: "/admin/kitchen",
   waiter: "/admin",
-  guest: "/login", // fallback
+  guest: "/login",
 };
 
 export default function ProtectedLayout({
@@ -49,7 +48,11 @@ export default function ProtectedLayout({
     const role = session?.user?.role || "guest";
     const allowedPaths = roleAccess[role] || [];
 
-    if (!allowedPaths.includes(pathname)) {
+    const hasAccess = allowedPaths.some(
+      (path) => pathname === path || pathname.startsWith(`${path}/`)
+    );
+
+    if (!hasAccess) {
       const redirectPath = roleDashboardPath[role] || "/login";
       router.replace(redirectPath);
     }
